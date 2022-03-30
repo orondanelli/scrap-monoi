@@ -1,5 +1,6 @@
 let request = require('request');
 let cheerio = require('cheerio');
+const sql = require('./config/db');
 
 var url = 'https://www.paris.cl/monoi-tiki-tahiti?q=monoi'
 request(url, function (error, response, html) {
