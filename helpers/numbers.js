@@ -1,5 +1,5 @@
 'use strict';
 
-exports.cleanNumber = (text) => {
-    return text.replace(/[$.]/g,'').trim();
+exports.cleanPrice = (price) => {
+    return parseInt(price.replace(/[$.]/g,'').trim());
 }
