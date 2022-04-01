@@ -1,5 +1,7 @@
-## Scrapping for find a cheap monoi
+# Scrapping for find a cheap monoi
 
-# sites scrapped
+I had a mission all the days: search for an cheap oil monoi 
+
+## sites scrapped
 - falabella.cl
 - paris.cl
