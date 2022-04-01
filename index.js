@@ -6,10 +6,9 @@ async function scrap() {
     let productFalabella = await falabella.getProduct()
     let productParis = await paris.getProduct()
 
-    let allProducts = productFalabella.concat(productParis)
+    let allProducts = await productFalabella.concat(productParis)
     products.createProducts(allProducts)
-    //console.log(allProducts)
-   
 
 }
+
 scrap();

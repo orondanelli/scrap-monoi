@@ -1,16 +1,29 @@
-'use strict';
-
-const client = require('../config/db');
+"use strict";
+const client = require("../config/db");
+const format = require('pg-format');
+const helper = require('../helpers/numbers')
 
 exports.createProducts = async (products) => {
-    let sql = 'INSERT INTO products(origin, src, name, price, brand) VALUES($1, $2, $3, $4, $5) RETURNING *'
+  products = products.map((item) => {
+    item = Object.values(item)
+    item.push(helper.timeSCL())
+    item.push(helper.timeSCL())
+    return item
+  })
 
-    try {
-        const res = await client.query(sql, products)
-        console.log(res.rows[0])
-        return true
-      } catch (err) {
-        console.log(err.stack)
-        return false
-      }
-}
+  let sql =
+    `INSERT INTO products(origin, src, name, price, brand, key, collected_at, calendar_dt) VALUES %L 
+    ON CONFLICT (calendar_dt, key)
+    DO UPDATE SET
+	  price = EXCLUDED.price,
+	  collected_at = EXCLUDED.collected_at
+    RETURNING *`;
+  try {
+    let res = await client.query(format(sql, products))
+    console.log(res.rows.length + ' rows analized')
+    return true
+  } catch (err) {
+    console.log(err.stack)
+    return false
+  }
+};
