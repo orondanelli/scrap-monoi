@@ -21,7 +21,7 @@ async function scrap() {
         let productParis = await paris.getProduct();
         let productSally = await sally.getProduct();
         let allProducts = await productFalabella.concat(productParis, productSally);
-        //await products.createProducts(allProducts);
+        await products.createProducts(allProducts);
         
     } catch (err) {
         console.log(err);
