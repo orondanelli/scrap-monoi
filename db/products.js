@@ -1,7 +1,7 @@
 "use strict";
 const client = require("../config/db");
 const format = require('pg-format');
-const helper = require('../helpers/numbers')
+const helper = require('../helpers/utils')
 
 exports.createProducts = async (products) => {
   products = products.map((item) => {
