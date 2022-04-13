@@ -32,7 +32,8 @@ exports.endLoad = async (loadNbr) => {
     WHERE load_nbr=$1;
     `;
   try {
-    let res = await client.query(sql, values)
+    await client.query('SET datestyle = dmy;')
+    await client.query(sql, values)
     console.log('load finalized with LoadNbr ' + loadNbr)
     return true
   } catch (err) {
