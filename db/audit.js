@@ -10,7 +10,9 @@ exports.initLoad = async () => {
         (status, start_load_dt, end_load_dt)
         VALUES('Initializated', $1, null)
         RETURNING load_nbr`;
+        console.log(sql)
   try {
+    await client.query('SET datestyle = dmy;')
     let res = await client.query(sql, values)
     let loadNbr = res.rows[0].load_nbr
     console.log('load initializated with LoadNbr ' + loadNbr)
